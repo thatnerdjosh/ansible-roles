@@ -1,0 +1,11 @@
+---
+- name: Add groups
+  group:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ dep_groups }}"
+- name: Add users
+  user:
+    name: "{{ item.name }}"
+    groups: "{{ item.groups }}"
+  with_items: "{{ users }}"

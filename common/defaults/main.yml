@@ -1,0 +1,86 @@
+---
+repos:
+  - url: https://download.docker.com/linux/fedora/28/x86_64/stable
+    name: docker-ce
+    description: Repository for Docker CE
+services:
+  - name: docker
+    enabled: true
+    state: started
+packages:
+  - git
+  - gcc
+  - zlib-devel
+  - vim
+  - python3-devel
+  - python2-devel
+  - libffi-devel
+  - openssl-devel
+  - bzip2-devel
+  - readline-devel
+  - redhat-rpm-config
+  - python-setuptools
+  - libselinux-python
+  - dnf-plugins-core
+  - 'dnf-command(config-manager)'
+  - docker-ce
+  - make
+  - sudo
+  - tmux
+  - ctags
+remove_packages: []
+install_additional: false
+additional_packages:
+  - "@xfce-desktop-environment"
+nerdfonts_base: "https://github.com/ryanoasis/nerd-fonts"
+nerdfonts:
+  - "DejaVuSansMono"
+git_repos:
+  - url: https://github.com/python/peps.git
+    dest: ~/development
+    name: peps
+  - url: https://github.com/NerdsvilleCEO/.files.git
+    dest: ~/development
+    name: .files
+  - url: https://github.com/pyenv/pyenv.git
+    dest: "~"
+    name: .pyenv
+  - url: https://github.com/pyenv/pyenv-virtualenv.git
+    dest: ~/.pyenv/plugins
+    name: pyenv-virtualenv
+  - url: https://github.com/tmux-plugins/tpm
+    dest: ~/.tmux/plugins
+    name: tpm
+go_version: 1.11.4
+go_url: https://dl.google.com/go/go{{go_version}}.linux-amd64.tar.gz
+global_go_packages:
+  - mvdan.cc/sh/shfmt
+primary_user: developer
+primary_group: developer
+git_config:
+  - name: user.email
+    value: josh@omnidapps.com
+  - name: user.name
+    value: "Josh Santos"
+dep_groups:
+  - docker
+users:
+  - name: "{{primary_user}}"
+    groups:
+      - docker
+directories:
+  - name: /home/{{primary_user}}/.local/share/fonts/
+    user: "{{primary_user}}"
+    group: "{{primary_group}}"
+  - name: /root/build
+    user: root
+    group: root
+  - name: /home/{{primary_user}}/.vim/autoload/
+    user: "{{primary_user}}"
+    group: "{{primary_group}}"
+config_files:
+  - .bashrc
+  - .bash_profile
+  - .bash_aliases
+  - .vimrc
+  - .tmux.conf

@@ -1,0 +1,76 @@
+---
+- name: Install build packages
+  package:
+    name: "{{ item }}"
+    state: installed
+  with_items: "{{ build_packages }}"
+
+- name: Install base packages
+  package:
+    name: "{{ item }}"
+    state: installed
+  with_items: "{{ packages }}"
+
+- name: Add groups
+  group:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ primary_groups }}"
+
+- name: Add primary user
+  user:
+    name: "{{ primary_user }}"
+    groups: "{{ primary_groups }}"
+    shell: /bin/bash
+    append: yes 
+
+- name: Install .bashrc
+  get_url:
+    url: https://raw.githubusercontent.com/nerdsvilleceo/.files/master/.bashrc
+    dest: "~/.bashrc"
+  become: true
+  become_user: "{{ primary_user }}"
+
+- name: Install .bash_profile
+  get_url:
+    url: https://raw.githubusercontent.com/nerdsvilleceo/.files/master/.bash_profile
+    dest: "~/.bash_profile"
+  become: true
+  become_user: "{{ primary_user }}"
+
+- name: Install .tmux.conf
+  get_url:
+    url: https://raw.githubusercontent.com/nerdsvilleceo/.files/master/.tmux.conf
+    dest: "~/.tmux.conf"
+  become: true
+  become_user: "{{ primary_user }}"
+
+- name: Add tpm dir
+  file:
+    path: ~/.tmux/plugins
+    recurse: true
+    state: directory
+  become: true
+  become_user: "{{ primary_user }}"
+
+- name: Add workspace dir
+  file:
+    path: /home/{{ primary_user }}/workspace
+    recurse: true
+    state: directory
+  become: true
+  become_user: "{{ primary_user }}"
+
+- name: Install tpm
+  git:
+    repo: https://github.com/tmux-plugins/tpm
+    dest: ~/.tmux/plugins/tpm
+    version: master
+  become: true
+  become_user: "{{ primary_user }}"
+
+- name: Remove build packages
+  package:
+    name: "{{ item }}"
+    state: absent
+  with_items: "{{ build_packages }}"

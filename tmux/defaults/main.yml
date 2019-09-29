@@ -1,0 +1,19 @@
+---
+packages:
+  - python
+  - python-dev
+  - docker
+  - git
+  - bash
+  - ctags
+  - tmux
+  - gcc
+  - libc6-compat
+build_packages:
+  - make
+  - gcc
+  - libc-dev
+  - ncurses-dev
+primary_user: developer
+primary_groups:
+  - docker

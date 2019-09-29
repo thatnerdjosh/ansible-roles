@@ -1,0 +1,20 @@
+---
+galaxy_info:
+  author: Josh Santos <josh@omnidapps.com>
+  description: Install common dependencies
+  company: OmnidApps LLC
+  license: MIT
+  min_ansible_version: 1.2
+
+  platforms:
+    - name: Fedora
+      versions:
+        - 29
+  # - name: SomePlatform
+  #   versions:
+  #   - all
+  #   - 1.0
+  #   - 7
+  #   - 99.99
+  galaxy_tags: []
+  dependencies: []

@@ -1,0 +1,8 @@
+---
+- name: Setup services
+  systemd:
+    name: "{{ item.name }}"
+    state: "{{ item.state }}"
+    enabled: "{{ item.enabled }}"
+  with_items: "{{ services }}"
+  ignore_errors: true
