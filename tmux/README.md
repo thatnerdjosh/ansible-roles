@@ -34,7 +34,7 @@ passed in as parameters) is always nice for users too:
 
     - hosts: servers
       roles:
-         - { role: ansible-role-vim, x: 42 }
+         - { role: vim, x: 42 }
 
 License
 -------

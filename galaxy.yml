@@ -1,0 +1,13 @@
+namespace: "NerdsvilleCEO"
+name: "ansible_roles"
+version: "1.0.0"
+readme: "README.md"
+authors:
+    - "Josh Santos <josh@omnidapps.com>"
+license:
+    - "MIT"
+tags:
+    - collection
+repository: "https://www.github.com/NerdsvilleCEO/ansible-roles"
+homepage: "http://omnidapps.com"
+issues: "https://www.github.com/NerdsvilleCEO/ansible-roles/issues"
